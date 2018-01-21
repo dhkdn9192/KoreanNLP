@@ -73,10 +73,12 @@ def get_pos(body):
 
 
 # 텍스트 한 라인을 파일에 append 모드로 저장하기
-def append_text_to_file(text, file_name):
+def append_text_to_file(posed_list, file_name):
     with open(file_name, "a", encoding="utf-8") as f:
-        f.write(text)
+        single_str = "\n".join(posed_list)      # 텍스트들의 리스트를 \n으로 구분되는 하나의 string으로
+        f.write(single_str)                     # write
         f.close()
+        print(single_str)  # 검사용
 
 
 # 로드된 json 리스트를 입력받아 각 json의 body만 추출하여 plain text로 반환하는 함수
@@ -85,8 +87,7 @@ def gen_plain_text(json_lines, wakati_file_name):
         body = get_body(line)                   # json 포맷의 한 라인에서 body 필드값 추출
         if len(body) > 0:                       # 내용물이 존재하면
             posed_list = get_pos(body)          # 형태소 분석 및 기본형으로 구성된 문장 생성
-            for posed in posed_list:
-                append_text_to_file(posed, wakati_file_name)    # 형태소 분석된  텍스트 라인을 파일로 저장하기(append)
+            append_text_to_file(posed_list, wakati_file_name)    # 형태소 분석된 텍스트 리스트를 파일로 저장하기
 
 
 # plain text를 학습한 word2vec 모델을 생성하는 함수
@@ -109,6 +110,8 @@ if __name__ == "__main__":
     # 로드된 데이터를 형태소 분석하고 plain text를 만들어 저장하는 함수
     gen_plain_text(loaded_data, wakati_file)
 
+    print("\n>> [INFO] Generating wakati file finished!")
+
     # plain text로 word2vec 모델 학습시키기
     digit_w2v_model = get_w2v_model(wakati_file)
 
@@ -116,4 +119,3 @@ if __name__ == "__main__":
     digit_w2v_model.save("../model/digitaltimes.model")
 
     print("\n>> [INFO] Generating word2vec model finished!")
-
