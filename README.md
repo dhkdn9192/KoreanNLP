@@ -2,7 +2,9 @@ Korean NLP with Python
 ======================
 # 1. Korean NLP Project
 ## 1.1. 프로젝트 개요
-한국어 텍스트에 대한 자연어 처리 프로젝트이다. 한국어 형태소 분석, Word2Vec 모델 학습, 인공신경망 기반 텍스트 분류, 미니 챗봇 설계 등을 포함한다.
+- 한국어 텍스트에 대한 자연어 처리 프로젝트이다. 
+- 한국어 형태소 분석, Word2Vec 모델 학습, 인공신경망 기반 텍스트 분류, 미니 챗봇 설계 등을 포함한다. 
+- 본 프로젝트의 코드는 "파이썬을 이용한 머신러닝, 딥러닝 실전 개발 입문"(쿠지라 히코우즈쿠에 저, 윤인성 옮김, 위키북스)를 참조하였음
 
 ## 1.2. 디렉토리 설명
 ### data
@@ -10,6 +12,14 @@ Word2Vec 모델을 학습시키기 위한 학습용 데이터 디렉토리. (한
     
 ### model
 생성된 Word2Vec 모델이 저장되는 디렉토리
+
+### w2v_with_kowiki
+한국어 위키 텍스트 데이터로 Word2Vec 모델을 생성하는 코드 디렉토리. 텍스트 데이터는 위키 덤프 URL( https://dumps.wikimedia.org/kowiki/latest )에서 다운로드하였음
+
+    - kowiki_w2v_01-make_wakati.py : 위키 텍스트를 형태소 분석하여 wakati 파일로 만드는 코드
+    - kowiki_w2v_02-make_w2v.py : Word2Vec 모델 생성 코드
+    - kowiki_w2v_load_model.ipynb : 생성된 Word2Vec 모델을 로드하는 주피터 노트북 코드
+    
 
 ### w2v_with_news
 뉴스 크롤링 데이터(디지털타임스)로 Word2Vec 모델을 생성하는 코드 디렉토리. 뉴스 데이터의 경우, 뉴스 크롤링 코드( https://github.com/dhkdn9192/NewsCrawling )를 이용하여 준비하였음
